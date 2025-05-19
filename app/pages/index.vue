@@ -3,7 +3,6 @@ const route = useRoute()
 const { data: news } = await useAsyncData(route.path, () => {
   return queryCollection('news')
     .order('date', 'DESC')
-    .limit(3)
     .all()
 })
 </script>
