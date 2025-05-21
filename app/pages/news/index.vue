@@ -21,6 +21,9 @@ const { data: news } = await useAsyncData(route.path, () => {
           {{ item.title }}
         </h2>
         <ContentRenderer :value="item" />
+        <NuxtLink :to="item.path">
+          Read more
+        </NuxtLink>
       </li>
     </ul>
   </div>
@@ -29,5 +32,7 @@ const { data: news } = await useAsyncData(route.path, () => {
 <style scoped>
 ul {
   padding: 4rem 2rem;
+  display: grid;
+  row-gap: 2rem;
 }
 </style>
