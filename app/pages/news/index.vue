@@ -1,6 +1,11 @@
 <script lang="ts" setup>
 const route = useRoute()
-const { data: news } = await useAsyncData(route.path, () => {
+
+function removeTrailingSlash(path: string): string {
+  return path.endsWith('/') && path.length > 1 ? path.slice(0, -1) : path
+}
+
+const { data: news } = await useAsyncData(removeTrailingSlash(route.path), () => {
   return queryCollection('news')
     .order('date', 'DESC')
     .all()

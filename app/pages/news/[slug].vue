@@ -1,6 +1,11 @@
 <script lang="ts" setup>
 const route = useRoute()
-const { data: news } = await useAsyncData(route.path, () => queryCollection('news').path(route.path).first())
+
+function removeTrailingSlash(path: string): string {
+  return path.endsWith('/') && path.length > 1 ? path.slice(0, -1) : path
+}
+
+const { data: news } = await useAsyncData(removeTrailingSlash(route.path), () => queryCollection('news').path(route.path).first())
 
 useSeoMeta({
   title: news.value?.title,
